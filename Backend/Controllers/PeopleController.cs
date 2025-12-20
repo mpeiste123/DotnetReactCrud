@@ -133,4 +133,7 @@ public class PeopleController : ControllerBase
         }
     }
 }
+// Server app: http://localhost:3000
+// client app (js app) : localhost:5173 => CORS   
+
 
