@@ -1,17 +1,36 @@
 import { Save, RotateCcw } from 'lucide-react';
+import { useForm } from 'react-hook-form';
 
 const PersonForm = () => {
+    const defaultFormValues = {
+        id:0,
+        firstName:'',
+        lastName:''
+    };
+    const {
+        register,
+         handleSubmit,
+   formState: {errors},
+} = useForm({
+    defaultValues: defaultFormValues
+});
 
+const onFormSubmit= (data) => {
+console.log(data);
+}
+
+   
     return (
         <div className="bg-white rounded-xl shadow-lg border border-gray-100 p-6" style={{ marginBottom: '5px' }}>
-            <div className="space-y-4">
+            <form className="space-y-4" onSubmit={handleSubmit(onFormSubmit)}>
+                <input type="hidden" {...register("id")}/>
                 <div className="flex flex-col sm:flex-row gap-4">
                     <div className="flex-1">
                         <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-2">
                             First Name*
                         </label>
                         <input
-                            type="text"
+                            type="text" {...register("firstName")}
                             className="w-full px-4 py-3 rounded-lg border transition-all duration-200 focus:outline-none focus:ring-2" placeholder="Enter first name"
                         />
 
@@ -26,8 +45,7 @@ const PersonForm = () => {
                         </label>
                         <input
                             type="text"
-                            id="lastName"
-                            name="lastName"
+                           {...register("lastName")}
 
                             className="w-full px-4 py-3 rounded-lg border transition-all duration-200 focus:outline-none focus:ring-2" placeholder="Enter last name"
                         />
@@ -54,7 +72,7 @@ const PersonForm = () => {
                         Reset
                     </button>
                 </div>
-            </div>
+            </form>
         </div>
     );
 };

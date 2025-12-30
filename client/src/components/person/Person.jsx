@@ -6,9 +6,9 @@ function Person() {
 
     const people = [
         
-            {id:1, firstName:'John', lastName:'Doe'},
-            {id:2, firstName:'John 1', lastName:'Doe 1'},
-            {id:3, firstName:'John 2', lastName:'Doe 2'}
+          {id:1, firstName:'John', lastName:'Doe'},
+          {id:2, firstName:'John 1', lastName:'Doe 1'},
+          {id:3, firstName:'John 2', lastName:'Doe 2'}
 
     ]
 
