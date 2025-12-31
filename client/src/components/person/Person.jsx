@@ -6,6 +6,8 @@ import { useForm } from 'react-hook-form';
 import toast ,{ Toaster } from 'react-hot-toast';
 function Person() {
 
+    const BASE_URL = import.meta.env.VITE_BASE_API_URL;
+
     const [people, setPeople] = useState  ([
         
           {id:1, firstName:'John', lastName:'Doe'},
@@ -80,14 +82,14 @@ try{
     toast.success("Deleted Successfully!")
 } catch(error)
 {
- toast.error("rror on deleting!")
+ toast.error("error on deleting!")
 }
 
 }
     
 
     return (
-        <div className="min-h-screen bg-gray-50 py-8">
+        <div className="min-h-screen bg-gray-50 py-8"> 
             <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
                 <div className="text-center mb-8">
                     <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
