@@ -1,19 +1,59 @@
 
+import { useEffect, useState } from "react";
 import PersonForm from "./PersonForm"
 import PersonList from "./PersonList"
+import { useForm } from 'react-hook-form';
 
 function Person() {
 
-    const people = [
+    const [people, setPeople] = useState  ([
         
           {id:1, firstName:'John', lastName:'Doe'},
           {id:2, firstName:'John 1', lastName:'Doe 1'},
           {id:3, firstName:'John 2', lastName:'Doe 2'}
 
-    ]
+
+    ]);
+    const [editData, setEditData] = useState(null);
+
+    //Whenever a change is made in 
+    // the editData method
+    // the following method 
+    // will be triggered
+
+    useEffect(() => {
+        methods.reset(editData)
+    }, [editData]);
+
+      const defaultFormValues = {
+        id:0,
+        firstName:'',
+        lastName:''
+    };
+
+    const methods = useForm({
+        defaultValues: defaultFormValues
+    });  
+
+    
+
+    const handleFormReset = () =>  {
+        methods.reset(defaultFormValues);
+    }
+    const handleFormSubmit= (person) => {
+if(person.id <= 0){
+    console.log("add");
+    
+}
+else 
+{
+    console.log("edit");
+    
+}
+    }
 
 const handlePersonEdit = (person) => {
-    console.log(person);
+   setEditData(person);
     
 }
 const handlePersonDelete = (person) => {
@@ -24,6 +64,8 @@ const handlePersonDelete = (person) => {
 console.log(person);
 
 }
+    
+
     return (
         <div className="min-h-screen bg-gray-50 py-8">
             <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
@@ -34,11 +76,12 @@ console.log(person);
 
                 </div>
 
-                <PersonForm />
+                <PersonForm  methods={methods} onFormReset={handleFormReset} onFormSubmit={handleFormSubmit}/>
                 <PersonList personList={people} onPersonEdit={handlePersonEdit} onPersonDelete={handlePersonDelete} />
             </div>
         </div>
     )
 }
+
 
 export default Person

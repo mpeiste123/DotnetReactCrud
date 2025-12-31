@@ -1,23 +1,14 @@
 import { Save, RotateCcw } from 'lucide-react';
-import { useForm } from 'react-hook-form';
 
-const PersonForm = () => {
-    const defaultFormValues = {
-        id:0,
-        firstName:'',
-        lastName:''
-    };
+
+const PersonForm = ({methods, onFormReset, onFormSubmit}) => {
+  
     const {
         register,
          handleSubmit,
    formState: {errors},
-} = useForm({
-    defaultValues: defaultFormValues
-});
+} = methods;
 
-const onFormSubmit= (data) => {
-console.log(data);
-}
 
    
     return (
@@ -30,13 +21,21 @@ console.log(data);
                             First Name*
                         </label>
                         <input
-                            type="text" {...register("firstName")}
+                            type="text" {...register("firstName", {
+                                required:true,
+                                maxLength:20
+                            })}
                             className="w-full px-4 py-3 rounded-lg border transition-all duration-200 focus:outline-none focus:ring-2" placeholder="Enter first name"
                         />
 
-                        <p className="mt-1 text-sm text-red-600 flex items-center">
-                            FirstName required
-                        </p>
+                        {errors.firstName?.type === 'required' && <p className="mt-1 text-sm text-red-600 flex items-center">
+                            FirstName is  required
+                        </p>}
+
+                        {errors.firstName?.type === 'maxLength' && <p className="mt-1 text-sm text-red-600 flex items-center">
+                            FirstName can not exceed 20 characters
+                        </p>}
+
                     </div>
 
                     <div className="flex-1">
@@ -45,13 +44,22 @@ console.log(data);
                         </label>
                         <input
                             type="text"
-                           {...register("lastName")}
+                           {...register("lastName",{
+                                required:true,
+                                maxLength:20
+                            })}
 
                             className="w-full px-4 py-3 rounded-lg border transition-all duration-200 focus:outline-none focus:ring-2" placeholder="Enter last name"
                         />
-                        <p className="mt-1 text-sm text-red-600 flex items-center">
-                            LastName required
-                        </p>
+
+                         {errors.lastName?.type === 'required' && <p className="mt-1 text-sm text-red-600 flex items-center">
+                            lastName is  required
+                        </p>}
+
+                        {errors.lastName?.type === 'maxLength' && <p className="mt-1 text-sm text-red-600 flex items-center">
+                            lastName can not exceed 20 characters
+                        </p>}
+                       
                     </div>
                 </div>
 
@@ -65,7 +73,7 @@ console.log(data);
                     </button>
 
                     <button
-                        type="button"
+                        type="button" onClick={onFormReset}
                         className="flex items-center justify-center px-6 py-3 bg-gray-100 text-gray-700 font-medium rounded-lg hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-all duration-200 transform hover:scale-105"
                     >
                         <RotateCcw className="w-4 h-4 mr-2" />
