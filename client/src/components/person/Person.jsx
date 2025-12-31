@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import PersonForm from "./PersonForm"
 import PersonList from "./PersonList"
 import { useForm } from 'react-hook-form';
-
+import toast ,{ Toaster } from 'react-hot-toast';
 function Person() {
 
     const [people, setPeople] = useState  ([
@@ -41,6 +41,7 @@ function Person() {
         methods.reset(defaultFormValues);
     }
     const handleFormSubmit= (person) => {
+try {
 if(person.id <= 0){
     console.log("add");
     
@@ -54,6 +55,15 @@ else
     ));
 }
 methods.reset(defaultFormValues);
+toast.success("Saved Successfully!")
+}
+catch(error) 
+{
+    toast.error("Error has occured!")
+}
+finally {
+
+}
     }
 
 const handlePersonEdit = (person) => {
@@ -65,7 +75,13 @@ const handlePersonDelete = (person) => {
     {
         return;
     }
-setPeople((previousPerson) =>previousPerson.filter(p =>p.id !== person.id))
+try{
+    setPeople((previousPerson) =>previousPerson.filter(p =>p.id !== person.id));
+    toast.success("Deleted Successfully!")
+} catch(error)
+{
+ toast.error("rror on deleting!")
+}
 
 }
     
