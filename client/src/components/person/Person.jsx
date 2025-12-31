@@ -44,12 +44,16 @@ function Person() {
 if(person.id <= 0){
     console.log("add");
     
+    setPeople((previousPerson)=> [...previousPerson, person]);
 }
 else 
 {
     console.log("edit");
-    
+    setPeople((previousPeople) => previousPeople.map(p => p.id === 
+        person.id ? person : p
+    ));
 }
+methods.reset(defaultFormValues);
     }
 
 const handlePersonEdit = (person) => {
@@ -61,7 +65,7 @@ const handlePersonDelete = (person) => {
     {
         return;
     }
-console.log(person);
+setPeople((previousPerson) =>previousPerson.filter(p =>p.id !== person.id))
 
 }
     
@@ -76,8 +80,8 @@ console.log(person);
 
                 </div>
 
-                <PersonForm  methods={methods} onFormReset={handleFormReset} onFormSubmit={handleFormSubmit}/>
-                <PersonList personList={people} onPersonEdit={handlePersonEdit} onPersonDelete={handlePersonDelete} />
+                 <PersonForm methods={methods} onFormSubmit={handleFormSubmit} onFormReset={handleFormReset} />
+                <PersonList peopleList={people} onPersonEdit={handlePersonEdit} onPersonDelete={handlePersonDelete} />
             </div>
         </div>
     )

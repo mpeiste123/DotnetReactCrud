@@ -1,20 +1,21 @@
 import { Save, RotateCcw } from 'lucide-react';
 
+const PersonForm = ({ methods, onFormReset, onFormSubmit }) => {
 
-const PersonForm = ({methods, onFormReset, onFormSubmit}) => {
-  
     const {
         register,
-         handleSubmit,
-   formState: {errors},
-} = methods;
+        handleSubmit,
+        formState: { errors },
+    } = methods;
 
 
-   
+
     return (
         <div className="bg-white rounded-xl shadow-lg border border-gray-100 p-6" style={{ marginBottom: '5px' }}>
             <form className="space-y-4" onSubmit={handleSubmit(onFormSubmit)}>
-                <input type="hidden" {...register("id")}/>
+                <input
+                    type="hidden" {...register("id")}
+                />
                 <div className="flex flex-col sm:flex-row gap-4">
                     <div className="flex-1">
                         <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-2">
@@ -22,8 +23,8 @@ const PersonForm = ({methods, onFormReset, onFormSubmit}) => {
                         </label>
                         <input
                             type="text" {...register("firstName", {
-                                required:true,
-                                maxLength:20
+                                required: true,
+                                maxLength: 30
                             })}
                             className="w-full px-4 py-3 rounded-lg border transition-all duration-200 focus:outline-none focus:ring-2" placeholder="Enter first name"
                         />
@@ -33,7 +34,7 @@ const PersonForm = ({methods, onFormReset, onFormSubmit}) => {
                         </p>}
 
                         {errors.firstName?.type === 'maxLength' && <p className="mt-1 text-sm text-red-600 flex items-center">
-                            FirstName can not exceed 20 characters
+                            FirstName can not exceed 30 characters
                         </p>}
 
                     </div>
@@ -44,22 +45,19 @@ const PersonForm = ({methods, onFormReset, onFormSubmit}) => {
                         </label>
                         <input
                             type="text"
-                           {...register("lastName",{
-                                required:true,
-                                maxLength:20
+                            {...register("lastName", {
+                                required: true,
+                                maxLength: 30
                             })}
-
                             className="w-full px-4 py-3 rounded-lg border transition-all duration-200 focus:outline-none focus:ring-2" placeholder="Enter last name"
                         />
-
-                         {errors.lastName?.type === 'required' && <p className="mt-1 text-sm text-red-600 flex items-center">
-                            lastName is  required
+                        {errors.lastName?.type === 'required' && <p className="mt-1 text-sm text-red-600 flex items-center">
+                            LastName is  required
                         </p>}
 
                         {errors.lastName?.type === 'maxLength' && <p className="mt-1 text-sm text-red-600 flex items-center">
-                            lastName can not exceed 20 characters
+                            LastName can not exceed 30 characters
                         </p>}
-                       
                     </div>
                 </div>
 
